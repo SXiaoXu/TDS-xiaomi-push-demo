@@ -268,7 +268,7 @@ class _LeavePageState extends State<LeavePage> {
                                   this._dropdownEndTime,
                                   this._controller.text)
                               .then((response) {
-                            sendEmail(response);
+                            // 测试推送的应用不需要发送邮件功能 sendEmail(response);
                             this._isButtonPressed = false;
                           }).catchError((error) {
                             showToastRed("报错1：" + error.toString());
@@ -300,39 +300,39 @@ class _LeavePageState extends State<LeavePage> {
   Future sendEmail(LCObject leave) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userType = prefs.getString('userType');
-    if (userType == 'LeanCloud 员工') {
-      LCUser user = await LCUser.getCurrent();
-      String userRN = user['realName'];
-      String startTime = time2cn(leave['startTime']);
-      String endTime = time2cn(leave['endTime']);
-      DateTime startDate = leave['startDate'];
-      DateTime endDate = leave['endDate'];
-      String note = leave['note'];
-      if (note == null || note == '') {
-        note = getEmojiString();
-      }
-      String leaveType = getVacationTypeString(leave['type']);
-      double duration = leave['duration'];
-      String endDateString =
-          formatDate(endDate, ['yyyy', '-', 'mm', '-', 'dd']);
-      String startDateString =
-          formatDate(startDate, ['yyyy', '-', 'mm', '-', 'dd']);
-
-      if (userRN == null) {
-        userRN = user.username;
-      }
-      String subject =
-          '$userRN 从 $startDateString$startTime 到 $endDateString$endTime 请 $duration 天 $leaveType';
-      try {
-        Map response = await LCCloud.run('sendLeaveEmail', params: {
-          'from': '${user.username}@leancloud.rocks',
-          'subject': subject,
-          'text': note
-        });
-      } on LCException catch (e) {
-        showToastRed(e.message);
-      }
-    }
+    // if (userType == 'LeanCloud 员工') {
+    //   LCUser user = await LCUser.getCurrent();
+    //   String userRN = user['realName'];
+    //   String startTime = time2cn(leave['startTime']);
+    //   String endTime = time2cn(leave['endTime']);
+    //   DateTime startDate = leave['startDate'];
+    //   DateTime endDate = leave['endDate'];
+    //   String note = leave['note'];
+    //   if (note == null || note == '') {
+    //     note = getEmojiString();
+    //   }
+    //   String leaveType = getVacationTypeString(leave['type']);
+    //   double duration = leave['duration'];
+    //   String endDateString =
+    //       formatDate(endDate, ['yyyy', '-', 'mm', '-', 'dd']);
+    //   String startDateString =
+    //       formatDate(startDate, ['yyyy', '-', 'mm', '-', 'dd']);
+    //
+    //   if (userRN == null) {
+    //     userRN = user.username;
+    //   }
+    //   String subject =
+    //       '$userRN 从 $startDateString$startTime 到 $endDateString$endTime 请 $duration 天 $leaveType';
+    //   try {
+    //     Map response = await LCCloud.run('sendLeaveEmail', params: {
+    //       'from': '${user.username}@leancloud.rocks',
+    //       'subject': subject,
+    //       'text': note
+    //     });
+    //   } on LCException catch (e) {
+    //     showToastRed(e.message);
+    //   }
+    // }
   }
 
   Future<List<LCObject>> getIrregular(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'Login.dart';
 import 'HomeBottomBar.dart';
@@ -17,12 +17,13 @@ class _SignUpPageState extends State<SignUpPage> {
   String _userName, _password;
   bool _isObscure = true;
   Color _eyeColor;
+  String _userIfLeancloud = 'LeanCloud 华北员工';
 
   Future userSignUp(String name, String password) async {
     CommonUtil.showLoadingDialog(context); //发起请求前弹出loading
 
     initLeanCloud().then((response) {
-      saveUserType('游客登录');
+      saveUserType(this._userIfLeancloud);
       saveUserProfile(name, password);
       signUp(name, password).then((value) {
         login(name, password).then((value) {
@@ -56,7 +57,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: kToolbarHeight,
                 ),
                 buildTitle(),
-                SizedBox(height: 70.0),
+                SizedBox(height: 20.0),
+                buildChooseUserDropdownButton(context),
+                SizedBox(height: 30.0),
                 buildEmailTextField(),
                 SizedBox(height: 30.0),
                 buildPasswordTextField(context),
@@ -149,6 +152,32 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  Padding buildChooseUserDropdownButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          DropdownButton<String>(
+            value: this._userIfLeancloud,
+            onChanged: (String newValue) {
+              setState(() {
+                this._userIfLeancloud = newValue;
+              });
+            },
+            items: <String>['LeanCloud 华北员工','LeanCloud 华东员工','LeanCloud 国际员工','TDS 员工','其他区员工']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
   TextFormField buildEmailTextField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -188,12 +217,33 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future initLeanCloud() async {
-    //游客登录
-    LeanCloud.initialize(
-        'HoiGvMeacbPWnv12MK', 'FesqQUmlhjMWt6uNrKaV6QPtYgBYZMP9QFmTUk54',
-        server: 'https://hoigvmea.cloud.tds1.tapapis.cn',
-        queryCache: new LCQueryCache());
+
+    if (_userIfLeancloud == 'LeanCloud 华北员工') {
+      LeanCloud.initialize(
+          'eLAwFuK8k3eIYxh29VlbHu2N-gzGzoHsz', 'G59fl4C1uLIQVR4BIiMjxnM3',
+          server: 'https://elawfuk8.lc-cn-n1-shared.com',
+          queryCache: new LCQueryCache());
+    } else if(_userIfLeancloud == 'LeanCloud 华东员工'){
+      LeanCloud.initialize('2ke9qjLSGeamYyU7dT6eqvng-9Nh9j0Va', 'FEttS9MjIXgmyvbslSp90aUI',
+          server: 'https://2ke9qjls.lc-cn-e1-shared.com',
+          queryCache: new LCQueryCache());
+    } else if (_userIfLeancloud == 'LeanCloud 国际员工') {
+      LeanCloud.initialize(
+          'glvame9g0qlj3a4o29j5xdzzrypxvvb30jt4vnvm66klph4r', 'n79rw9ja3eo8n8au838t7pqur5mw88pnnep6ahlr99iq661a',
+          server: 'https://glvame9g.api.lncldglobal.com',
+          queryCache: new LCQueryCache());
+    } else if(_userIfLeancloud == 'TDS 员工'){
+      LeanCloud.initialize('HoiGvMeacbPWnv12MK', 'FesqQUmlhjMWt6uNrKaV6QPtYgBYZMP9QFmTUk54',
+          server: 'https://hoigvmea.cloud.tds1.tapapis.cn',
+          queryCache: new LCQueryCache());
+    }else{
+      //其他区员工，测试区账号
+      LeanCloud.initialize('6HKynQEeIYeWpHmF9e7ocY5R-TeStHjQi', 'FLx5kVKBU04k6SxmuIVndMNy',
+          server: 'https://6hkynqee.uc-test1.lc-cn-n1-shared.com',
+          queryCache: new LCQueryCache());
+    }
   }
+
   Future saveUserProfile(String username,String password) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', username);

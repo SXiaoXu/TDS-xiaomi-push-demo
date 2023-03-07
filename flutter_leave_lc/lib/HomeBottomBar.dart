@@ -40,7 +40,7 @@ class _HomeBottomBarPageState extends State<HomeBottomBarPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String name = prefs.getString('username');
     String userType = prefs.getString('userType');
-    if (userType == 'LeanCloud 员工') {
+    if (userType == 'LeanCloud 华北员工') {
       if (name == 'hwang' || name == 'mwu') {
         _isAdmin = true;
       }

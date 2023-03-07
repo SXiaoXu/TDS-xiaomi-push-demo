@@ -24,6 +24,7 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   leancloud_storage: ^0.7.10
+  leancloud_official_plugin: ^1.0.1
   http: ^0.13.4
   date_format: ^2.0.4
   flutter_localizations:

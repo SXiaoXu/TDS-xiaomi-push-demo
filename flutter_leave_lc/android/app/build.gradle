@@ -57,18 +57,14 @@ android {
         }
     }
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
+//        debug {
+//            signingConfig signingConfigs.debug
+//        }
         release {
+//            minifyEnabled false
+//            shrinkResources false
+//            zipAlignEnabled false
 //            signingConfig signingConfigs.release
-//            minifyEnabled true
-//            useProguard true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            minifyEnabled false
-            shrinkResources false
-            zipAlignEnabled false
-            signingConfig signingConfigs.release
         }
     }
 }
@@ -78,7 +74,7 @@ flutter {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

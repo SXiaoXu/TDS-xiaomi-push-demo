@@ -360,8 +360,8 @@ class _MyInformationPageState extends State<MyInformationPage> {
     LCUser user = await LCUser.getCurrent();
     dynamic currentUser;
     try {
-      Map<String, dynamic> userMap = await LCCloud.run('queryUsers');
-      List<dynamic> users = userMap['result'];
+      LCQuery<LCObject> query = LCQuery('_User');
+      List<LCObject> users = await query.find();
 
       for (var obj in users) {
         if (obj['objectId'] == user.objectId) {

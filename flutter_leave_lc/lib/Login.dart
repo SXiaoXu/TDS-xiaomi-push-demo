@@ -73,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             (_) => false);
       }).catchError((error) {
         showToastRed(error.message);
+        print(error.message);
         Navigator.pop(context); //销毁 loading
       });
     }).catchError((error) {
@@ -388,31 +389,27 @@ class _LoginPageState extends State<LoginPage> {
     } else if (_userIfLeancloud == 'LeanCloud 国际员工') {
       LeanCloud.initialize('glvame9g0qlj3a4o29j5xdzzrypxvvb30jt4vnvm66klph4r',
           'n79rw9ja3eo8n8au838t7pqur5mw88pnnep6ahlr99iq661a',
-          server: 'https://glvame9g.api.lncldglobal.com',
+          server: 'https://usfcm.goodluckin.top',
           queryCache: new LCQueryCache());
-      try {
-        await platformUS.invokeMethod('initLC-US');
-      } on PlatformException catch (e) {
-        showToastRed("Android 原生 SDK 初始化失败");
-      }
     } else if (_userIfLeancloud == 'TDS 员工') {
       LeanCloud.initialize(
           'HoiGvMeacbPWnv12MK', 'FesqQUmlhjMWt6uNrKaV6QPtYgBYZMP9QFmTUk54',
           server: 'https://hoigvmea.cloud.tds1.tapapis.cn',
           queryCache: new LCQueryCache());
-    } else {
+    } else if (_userIfLeancloud == '其他区员工') {
       //其他区员工，测试区账号
       LeanCloud.initialize(
           '6HKynQEeIYeWpHmF9e7ocY5R-TeStHjQi', 'FLx5kVKBU04k6SxmuIVndMNy',
-          server: 'https://6hkynqee.uc-test1.lc-cn-n1-shared.com',
+          server: 'https://api.uc-test1.leancloud.cn',
           queryCache: new LCQueryCache());
+
+      // 在 LeanCloud.initialize 初始化之后执行
+      LCLogger.setLevel(LCLogger.DebugLevel);
     }
     initAndroidSDK(_userIfLeancloud);
   }
 
   Future initAndroidSDK(String usertype) async {
-    showToastRed("initAndroidSDK-----");
-
     if (usertype == 'LeanCloud 华北员工') {
       try {
         await platformNorthChina.invokeMethod('initLC-NorthChina');
@@ -426,13 +423,19 @@ class _LoginPageState extends State<LoginPage> {
       } on PlatformException catch (e) {
         showToastRed("Android 原生 SDK 初始化失败");
       }
+    } else if (usertype == 'LeanCloud 国际员工') {
+      try {
+        await platformUS.invokeMethod('initLC-US');
+      } on PlatformException catch (e) {
+        showToastRed("Android 原生 SDK 初始化失败");
+      }
     } else if (usertype == 'TDS 员工') {
       try {
         await platformTDS.invokeMethod('initTDS');
       } on PlatformException catch (e) {
         showToastRed("Android 原生 SDK 初始化失败");
       }
-    } else {
+    } else if (usertype == '其他区员工') {
       try {
         await platformTest.invokeMethod('init-Test');
       } on PlatformException catch (e) {

@@ -18,6 +18,11 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isObscure = true;
   Color _eyeColor;
   String _userIfLeancloud = 'LeanCloud 华北员工';
+  static const platformNorthChina = MethodChannel('initLC-NorthChina');
+  static const platformEastChina = MethodChannel('initLC-EastChina');
+  static const platformUS = MethodChannel('initLC-US');
+  static const platformTDS = MethodChannel('initTDS');
+  static const platformTest = MethodChannel('init-Test');
 
   Future userSignUp(String name, String password) async {
     CommonUtil.showLoadingDialog(context); //发起请求前弹出loading
@@ -230,7 +235,7 @@ class _SignUpPageState extends State<SignUpPage> {
     } else if (_userIfLeancloud == 'LeanCloud 国际员工') {
       LeanCloud.initialize(
           'glvame9g0qlj3a4o29j5xdzzrypxvvb30jt4vnvm66klph4r', 'n79rw9ja3eo8n8au838t7pqur5mw88pnnep6ahlr99iq661a',
-          server: 'https://glvame9g.api.lncldglobal.com',
+          server: 'https://usfcm.goodluckin.top',
           queryCache: new LCQueryCache());
     } else if(_userIfLeancloud == 'TDS 员工'){
       LeanCloud.initialize('HoiGvMeacbPWnv12MK', 'FesqQUmlhjMWt6uNrKaV6QPtYgBYZMP9QFmTUk54',
@@ -239,8 +244,44 @@ class _SignUpPageState extends State<SignUpPage> {
     }else{
       //其他区员工，测试区账号
       LeanCloud.initialize('6HKynQEeIYeWpHmF9e7ocY5R-TeStHjQi', 'FLx5kVKBU04k6SxmuIVndMNy',
-          server: 'https://6hkynqee.uc-test1.lc-cn-n1-shared.com',
+          server: 'https://api.uc-test1.leancloud.cn',
           queryCache: new LCQueryCache());
+    }
+    initAndroidSDK(_userIfLeancloud);
+  }
+  Future initAndroidSDK(String usertype) async {
+
+    if (usertype == 'LeanCloud 华北员工') {
+      try {
+        await platformNorthChina.invokeMethod('initLC-NorthChina');
+        showToastRed("initAndroidSDK-----initLC-NorthChina");
+      } on PlatformException catch (e) {
+        showToastRed("Android 原生 SDK 初始化失败");
+      }
+    } else if (usertype == 'LeanCloud 华东员工') {
+      try {
+        await platformEastChina.invokeMethod('initLC-EastChina');
+      } on PlatformException catch (e) {
+        showToastRed("Android 原生 SDK 初始化失败");
+      }
+    } else if(usertype == 'LeanCloud 国际员工'){
+      try {
+        await platformUS.invokeMethod('initLC-US');
+      } on PlatformException catch (e) {
+        showToastRed("Android 原生 SDK 初始化失败");
+      }
+    } else if (usertype == 'TDS 员工') {
+      try {
+        await platformTDS.invokeMethod('initTDS');
+      } on PlatformException catch (e) {
+        showToastRed("Android 原生 SDK 初始化失败");
+      }
+    } else {
+      try {
+        await platformTest.invokeMethod('init-Test');
+      } on PlatformException catch (e) {
+        showToastRed("Android 原生 SDK 初始化失败");
+      }
     }
   }
 

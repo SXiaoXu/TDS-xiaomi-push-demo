@@ -38,11 +38,11 @@ public class MainActivity extends FlutterActivity {
     private static final String LC_APP_KEY_Test = "FLx5kVKBU04k6SxmuIVndMNy";
     private static final String LC_SERVER_URL_Test = "https://api.uc-test1.leancloud.cn";
 //appstore_xsui
-//    private static final String XIAOMI_APP = "2882303761520227426";
-//    private static final String XIAOMI_KEY = "5202022724426";
-//xsui_platform
-private static final String XIAOMI_APP = "2882303761517988199";
-    private static final String XIAOMI_KEY = "5571798886199";
+    private static final String XIAOMI_APP = "2882303761520227426";
+    private static final String XIAOMI_KEY = "5202022724426";
+////xsui_platform
+//private static final String XIAOMI_APP = "2882303761517988199";
+//    private static final String XIAOMI_KEY = "5571798886199";
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -54,9 +54,7 @@ private static final String XIAOMI_APP = "2882303761517988199";
                             if (call.method.equals("initLC-NorthChina")) {
                                 LeanCloud.setLogLevel(LCLogger.Level.DEBUG);
                                 LeanCloud.initialize(this, LC_APP_ID_NorthChina, LC_APP_KEY_NorthChina, LC_SERVER_URL_NorthChina);
-//                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
-                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"xsui_platform");
-
+                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
                             } else {
                                 result.notImplemented();
                             }
@@ -69,8 +67,7 @@ private static final String XIAOMI_APP = "2882303761517988199";
                             if (call.method.equals("initLC-EastChina")) {
                                 LeanCloud.setLogLevel(LCLogger.Level.DEBUG);
                                 LeanCloud.initialize(this, LC_APP_ID_EastChina, LC_APP_KEY_EastChina, LC_SERVER_URL_EastChina);
-//                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
-                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"xsui_platform");
+                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
 
                             } else {
                                 result.notImplemented();
@@ -84,8 +81,7 @@ private static final String XIAOMI_APP = "2882303761517988199";
                             if (call.method.equals("initLC-US")) {
                                 LeanCloud.setLogLevel(LCLogger.Level.DEBUG);
                                 LeanCloud.initialize(this, LC_APP_ID_US, LC_APP_KEY_US, LC_SERVER_URL_US);
-//                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
-                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"xsui_platform");
+                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
 
                             } else {
                                 result.notImplemented();
@@ -99,8 +95,7 @@ private static final String XIAOMI_APP = "2882303761517988199";
                             if (call.method.equals("initTDS")) {
                                 LeanCloud.setLogLevel(LCLogger.Level.DEBUG);
                                 LeanCloud.initialize(this, LC_APP_ID_TDS, LC_APP_KEY_TDS, LC_SERVER_URL_TDS);
-//                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
-                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"xsui_platform");
+                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
 
                             } else {
                                 result.notImplemented();
@@ -114,9 +109,7 @@ private static final String XIAOMI_APP = "2882303761517988199";
                             if (call.method.equals("init-Test")) {
                                 LeanCloud.setLogLevel(LCLogger.Level.DEBUG);
                                 LeanCloud.initialize(this, LC_APP_ID_Test, LC_APP_KEY_Test, LC_SERVER_URL_Test);
-//                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
-                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"xsui_platform");
-
+                                LCMixPushManager.registerXiaomiPush(this, XIAOMI_APP, XIAOMI_KEY,"appstore_xsui");
                             } else {
                                 result.notImplemented();
                             }

@@ -57,14 +57,14 @@ android {
         }
     }
     buildTypes {
-//        debug {
-//            signingConfig signingConfigs.debug
-//        }
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
-//            minifyEnabled false
-//            shrinkResources false
-//            zipAlignEnabled false
-//            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            signingConfig signingConfigs.release
         }
     }
 }

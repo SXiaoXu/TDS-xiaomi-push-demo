@@ -3,6 +3,7 @@ import 'package:flutterapplc/Common/Global.dart';
 import 'package:flutterapplc/Setting.dart';
 import 'package:flutterapplc/WeeklySummary.dart';
 import 'package:flutterapplc/WeeklyTabbar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'LeavePage.dart';
 import 'MyInformation.dart';
 import 'package:flutterapplc/WeeklySummary.dart';
@@ -17,7 +18,7 @@ class HomeBottomBarPage extends StatefulWidget {
   _HomeBottomBarPageState createState() => _HomeBottomBarPageState();
 }
 
-class _HomeBottomBarPageState extends State<HomeBottomBarPage> {
+class _HomeBottomBarPageState extends State<HomeBottomBarPage>{
   int _currentIndex = 0; //记录当前选中的页面
   bool _isAdmin = false;
   bool _isAdminButtonPressed = false;
@@ -32,9 +33,8 @@ class _HomeBottomBarPageState extends State<HomeBottomBarPage> {
   @override
   void initState() {
     super.initState();
-    queryProfile();
+    // queryProfile();
   }
-
   queryProfile() async {
     _isAdmin = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();

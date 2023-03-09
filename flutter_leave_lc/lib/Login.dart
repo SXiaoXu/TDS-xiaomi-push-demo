@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapplc/Privacy.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'HomeBottomBar.dart';
+import 'ProtocolDialogPage.dart';
 import 'SignUp.dart';
 import 'Common/Global.dart';
 import 'package:leancloud_storage/leancloud.dart';
@@ -36,13 +38,37 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     saveProfile();
+    Future.delayed(Duration.zero, () {
+      isFirstLaunch();
+    });
   }
 
-  saveProfile() async {
+  void isFirstLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isAgree = prefs.getBool('isAgree');
+    //第一次弹窗通知
+    if (isAgree == false || isAgree == null) {
+      showProtocolDialogPage();
+    }
+  }
+
+  showProtocolDialogPage() {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new ProtocolDialog(),
+      ),
+    );
+  }
+
+  void saveProfile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String name = prefs.getString('username');
     String userType = prefs.getString('userType');
+    String password = prefs.getString('password');
+
     if (userType != null || userType != '') {
       setState(() {});
     }
@@ -50,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
     if (name != null) {
       _controllerName.text = name;
     }
-    String password = prefs.getString('password');
     if (password != null) {
       _controllerPassword.text = password;
     }

@@ -17,7 +17,7 @@ class _UserProtocolPageState extends State<PrivacyPage> {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-      url: "https://leavetd.goodluckin.top/",
+      url: "https://xiaomi.goodluckin.top/",
       appBar: AppBar(
         //导航栏
         title: Text("用户隐私政策"),

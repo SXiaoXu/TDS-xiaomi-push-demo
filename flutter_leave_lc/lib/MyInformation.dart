@@ -3,6 +3,8 @@ import 'package:flutterapplc/Login.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Common/Global.dart';
+import 'Privacy.dart';
+import 'UserProtocol.dart';
 
 //TODO 手机号、邮箱、RealName
 class MyInformationPage extends StatefulWidget {
@@ -208,10 +210,64 @@ class _MyInformationPageState extends State<MyInformationPage> {
                 ],
               ),
             ),
+            new Container(
+              margin: const EdgeInsets.fromLTRB(0, 20, 10, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text(
+                      '查看用户使用协议',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    onTap: () => showUserProtocolPage(),
+                  )
+                ],
+              ),
+            ),new Container(
+              margin: const EdgeInsets.fromLTRB(0, 20, 10, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text(
+                      '查看隐私政策',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    onTap: () => showPrivacyPage(),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
     ));
+  }
+  showUserProtocolPage() {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new UserProtocolPage(),
+      ),
+    );
+  }
+
+  showPrivacyPage() {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new PrivacyPage(),
+      ),
+    );
   }
   Future<bool> saveProfile() async {
     return showDialog<bool>(

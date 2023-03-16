@@ -25,8 +25,8 @@ class _ProtocolDialogState extends State<ProtocolDialog> {
   String protocolDetail = '''
 
 1. 为了向您提供账户注册服务，我们会收集您的必要个人信息，包括当前应用使用的用户名与密码用来创建账号，绑定用户手机号码。
-2. LeaveTD APP 不会收集设备 Mac 地址，也不会采集唯一设备识别码（如 IMEI / android ID / IDFA / OPENUDID / GUID、SIM 卡 IMSI 信息等）对用户进行唯一标识。
-3. LeaveTD APP 不会访问用户其他应用的数据信息，也不会将您的信息共享给第三方。
+2. LeanCloud APP 不会收集设备 Mac 地址，也不会采集唯一设备识别码（如 IMEI / android ID / IDFA / OPENUDID / GUID、SIM 卡 IMSI 信息等）对用户进行唯一标识。
+3. LeanCloud APP 不会访问用户其他应用的数据信息，也不会将您的信息共享给第三方。
 4. 您可以查询、更正、以及注销账户信息。
     ''';
 

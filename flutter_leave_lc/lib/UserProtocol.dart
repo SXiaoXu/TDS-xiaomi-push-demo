@@ -15,7 +15,7 @@ class _UserProtocolPageState extends State<UserProtocolPage> {
   Widget build(BuildContext context) {
     String str = '''
 
-LeaveTD 是 LeanCloud 公司内部员工使用的工具类应用，用于请假与请假查询。用户使用本应用需接受本协议的全部条款。
+LeanCloud 是美味书签（北京）信息技术有限公司内部员工使用的工具类应用，用于请假与请假查询。用户使用本应用需接受本协议的全部条款。
 
 1.您使用本应用的行为必须合法。
 
